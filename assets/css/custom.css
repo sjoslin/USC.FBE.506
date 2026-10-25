@@ -1,0 +1,32 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+/* Code blocks with copy button - enable wrapping */
+.codehilite pre,
+.highlight pre,
+pre.codehilite,
+pre.highlight {
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  max-width: 80ch !important;
+  overflow-x: auto !important;
+}
+
+/* Output blocks — distinct from command blocks */
+.output pre,
+.output code {
+  background-color: #f0f4f8 !important;
+  border-left: 3px solid #94a3b8 !important;
+}
+
+/* Wide screen */
+@media (min-width: 1400px) {
+  .side-bar {
+    width: 28rem;
+  }
+  .main-content {
+    margin-left: 28rem;
+  }
+}

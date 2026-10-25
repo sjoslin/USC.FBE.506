@@ -1,0 +1,12 @@
+title: FBE 506 - Quantitative Methods in Finance
+description: Local setup and working with coding agents
+theme: just-the-docs
+
+url: https://sjoslin.github.io
+baseurl: /USC.FBE.506
+
+mermaid:
+  version: "10.9.0"
+
+custom_css:
+  - /assets/css/custom.css
