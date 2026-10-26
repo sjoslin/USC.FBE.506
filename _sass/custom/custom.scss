@@ -1,0 +1,40 @@
+// Rule overrides. Imported by just-the-docs after its own styles.
+
+// Tighten code blocks.
+//
+// The theme sets `code { font-size: 0.75em; line-height: 1.4 }` but leaves
+// <pre> inheriting line-height 1.6 at the full body font size. The <pre>
+// strut is then taller than the code text needs, and every line box gets
+// padded out to it, which reads as a blank gap between lines.
+//
+// Putting the size on the <pre> and resetting the <code> to 1em makes both
+// struts agree, so the lines sit where they should.
+.highlight pre,
+pre.highlight {
+  font-size: 0.75em;
+  line-height: 1.45;
+
+  // Long commands wrap instead of scrolling sideways.
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.highlight pre code,
+pre.highlight code {
+  font-size: 1em;      // not 0.75em again: that would compound
+  line-height: inherit;
+}
+
+// A left edge on block code, so it reads differently from `inline code`,
+// which shares the same background colour. Uses the active scheme's border
+// colour so it works on a light or a dark flavour.
+div.highlighter-rouge,
+figure.highlight {
+  border-left: 3px solid $border-color;
+}
+
+blockquote {
+  border-left: 3px solid $border-color;
+  padding-left: 1rem;
+  margin-left: 0;
+}

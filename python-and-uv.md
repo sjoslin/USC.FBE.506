@@ -1,13 +1,14 @@
 ---
-title: Python and uv
+title: Python Environments
+parent: Optional Topics
 layout: default
-nav_order: 3
-permalink: /python/
+nav_order: 1
+permalink: /optional/environments/
 ---
 
-# Python and uv
+# Python Environments
 
-What the setup page actually did, and enough of a model to debug it when something goes wrong. None of this is required before you start. It's worth reading the first time Python does something you don't expect.
+What the setup actually did, and enough of a model to debug it yourself when Python does something you don't expect.
 
 ---
 

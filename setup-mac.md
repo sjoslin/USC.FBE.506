@@ -1,163 +1,73 @@
 ---
-title: Mac Setup
+title: Mac Setup (Overview)
+parent: Installing Local Python and Local AI
 layout: default
-nav_order: 1
-permalink: /mac/
+nav_order: 4
+permalink: /install/mac/
 ---
 
-# Setting Up Your Mac
+# Mac Setup: Overview
 
-By the end of this page you'll have Python, an editor, and an AI coding agent, all working together. About twenty minutes, most of it waiting for downloads.
-
-You don't need to understand what each command does. If you'd like to, [Python and uv]({{ site.baseurl }}/python/) explains the Python half, and it's worth reading the first time something breaks.
-
-Open **Terminal** (`Cmd+Space`, type "Terminal") and work down the page. Each step ends with a check. If a check fails, stop there rather than carrying on.
+What you're about to install, and what's particular to a Mac. Two minutes, then the [commands]({{ site.baseurl }}/install/mac/steps/).
 
 ---
 
-## 0. Homebrew
+## Before you start
 
-Homebrew installs software from the command line, so you don't go hunting for download pages.
+**Time.** About twenty minutes, nearly all of it waiting for downloads. It isn't twenty minutes of typing.
 
-```bash
-# Download and run Homebrew's installer.
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+**Your password.** You'll be asked for it once or twice. These are normal installs, not anything unusual.
 
-# Tell your shell where Homebrew put itself, now and in future sessions.
-echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-eval "$(/opt/homebrew/bin/brew shellenv)"
-```
+**Disk space.** Around 5 GB, mostly Xcode's Command Line Tools and VS Code.
 
-On a new Mac this first downloads Apple's Command Line Tools: a few minutes, and it asks for your password.
-
-**Check:** `brew --version` prints a version number.
+**A network you trust.** Campus wifi is fine. A hotel captive portal is not, and you'll get confusing half-failures.
 
 ---
 
-## 1. Python
+## Terminal
 
-```bash
-# uv manages Python itself, this project's packages, and the folder
-# that keeps them separate from everything else on your Mac.
-brew install uv
+Everything happens in **Terminal**, an app already on your Mac. Press `⌘-Space`, type "Terminal", press return.
 
-# The folder all your course work will live in.
-mkdir ~/fbe506
-cd ~/fbe506
+If you've never used one: it's a window where you type a command and press return, and the program prints its answer. Nothing is hidden and nothing happens that you didn't type. You can copy each command from this site and paste it in.
 
-# Mark this folder as a project, using Python 3.12.
-uv init --python 3.12
-
-# Install the packages this course uses. A minute or so the first time.
-uv add pandas numpy matplotlib statsmodels scikit-learn \
-       yfinance pandas-datareader jupyter openpyxl
-```
-
-**Check:** `uv run python -c "print('hello world')"`
-
-Everything landed in `~/fbe506`. Nothing was installed system-wide, so none of this can break anything else on your Mac, and deleting that folder undoes all of it.
-
-[What just happened]({{ site.baseurl }}/python/)
+One habit worth forming now: read what comes back. Most problems in this course announce themselves clearly and get ignored because people are pasting the next line.
 
 ---
 
-## 2. VS Code
+## What gets installed, in order
 
-The editor. It runs your notebooks, and it's where the AI agent lives.
+Each step depends on the one before it, so do them top to bottom.
 
-```bash
-brew install --cask visual-studio-code
-```
-
-**Check:** `code --version` prints a version number.
-
----
-
-## 3. Extensions
-
-```bash
-code --install-extension ms-python.python        # Python support
-code --install-extension ms-toolsai.jupyter      # notebooks in the editor
-code --install-extension ms-toolsai.datawrangler # point-and-click data cleaning
-code --install-extension charliermarsh.ruff      # flags mistakes as you type
-```
-
-**Data Wrangler** is the one you won't expect to like. Click any DataFrame and you get a spreadsheet view with a distribution and a missing-value count for every column. Clean it by clicking, and it writes the pandas code for what you did.
-
-**Check:** the Extensions panel (`Cmd+Shift+X`) lists all four under Installed.
+| | |
+|---|---|
+| **Homebrew** | installs other software from the command line |
+| **uv** | Python itself, plus this course's packages |
+| **VS Code** | the editor |
+| **Extensions** | Python, notebooks, data viewing |
+| **Codex** | the AI agent, and its permissions |
 
 ---
 
-## 4. Codex
+## Two things specific to a Mac
 
-```bash
-# The agent itself, and its panel inside VS Code.
-brew install --cask codex
-code --install-extension openai.chatgpt
+**There's no built-in way to install developer software.** Windows has `winget`; macOS has nothing equivalent. Homebrew fills that gap, which is why it's step 0 rather than something we skip. Everything after it is one short command.
 
-# Its settings file.
-mkdir -p ~/.codex
-cat > ~/.codex/config.toml <<'TOML'
-sandbox_mode    = "workspace-write"
-approval_policy = "never"
+**Your Mac already has a Python.** Apple ships one for its own internal use, and the Homebrew installer pulls in more of Apple's developer tools along the way. It's several years old and has none of the libraries this course needs. We don't remove it, because macOS uses it. We just make sure your work never touches it.
 
-[sandbox_workspace_write]
-network_access = true
-TOML
-
-# Sign in.
-codex login
-```
-
-`codex login` opens a browser. **Choose the USC workspace, not a personal account.** USC's plan gives you 6,500 credits a month. A personal account gives you a free-tier trickle that runs out around week three.
-
-Those three settings are the important part of this page:
-
-- **`workspace-write`**: Codex can read anything, but can only *write* inside the folder you have open. It can't touch the rest of your computer.
-- **`approval_policy = "never"`**: it won't interrupt you to ask permission, because the line above already answered the question.
-- **`network_access = true`**: it can reach the internet, which it needs for every data download in this course.
-
-**Check:** the Codex icon appears in VS Code's left sidebar.
+That second point is the source of nearly every confusing Python error you'll hit, and it's worth knowing before you meet it rather than after. ([the full story]({{ site.baseurl }}/optional/environments/#which-python-am-i-running))
 
 ---
 
-## 5. Your first notebook
+## When you're done
 
-```bash
-code ~/fbe506
-```
+A folder at `~/fbe506` holding your work, its own copy of Python, and every package the course uses. VS Code opens it, runs your notebooks, and has Codex in the sidebar able to read and write files in that folder and nowhere else.
 
-By hand, once, so you know what the pieces are:
+The four tools install where any application would: Homebrew and uv under `/opt/homebrew`, VS Code in `/Applications`. uv also keeps a shared download cache in your home folder so that a second project doesn't re-download everything.
 
-1. `Cmd+Shift+P`, then **Create: New Jupyter Notebook**
-2. Top right, the kernel should already say **.venv**. If it doesn't, click it and choose the one ending in `.venv/bin/python`.
-3. First cell: `import pandas as pd` then `print(pd.__version__)`. Press `Shift+Enter`.
-4. Save it as `hello.ipynb`.
-
-Then the same job with the agent. In the **Codex** panel:
-
-> make a new notebook that downloads the last year of SPY prices and plots the closing price
-
-It writes the file, runs it, and shows you the result. It never stops to ask permission, and it can't write anywhere outside `~/fbe506`.
-
-That's the setup. You're done.
+The part that matters: no package is installed into your Mac's own Python, and no two projects share a set of packages that can conflict. Deleting `~/fbe506` undoes this project completely.
 
 ---
 
-## When something breaks
+## Next
 
-**`command not found: brew`**: you skipped the two lines after the installer in step 0, or this Terminal window was open before you ran them. Open a new one.
-
-**A notebook says pandas isn't installed**: it's running the wrong Python. Click the kernel name in the top right and choose the one ending in `.venv/bin/python`. ([why]({{ site.baseurl }}/python/#which-python-am-i-running))
-
-**`python` doesn't work in Terminal**: use VS Code's built-in terminal rather than a Terminal window. ([why]({{ site.baseurl }}/python/#which-python-am-i-running))
-
-**Codex stops to ask permission**: `~/.codex/config.toml` didn't load. Check the path and spelling, then quit and reopen VS Code.
-
-**Codex writes files but can't download anything**: `network_access = true` is missing from that file.
-
-**You need a package that isn't installed**: `uv add <name>` in Terminal, from inside `~/fbe506`. Then restart the notebook's kernel.
-
----
-
-Later in the course: [running the agent in a container]({{ site.baseurl }}/containers/), once we want to take the guardrails off.
+[Mac Setup (Steps)]({{ site.baseurl }}/install/mac/steps/)

@@ -1,13 +1,14 @@
 ---
-title: Containers
+title: Better Sandboxing
+parent: Optional Topics
 layout: default
-nav_order: 4
-permalink: /containers/
+nav_order: 2
+permalink: /optional/sandboxing/
 ---
 
-# Running the Agent in a Container
+# Better Sandboxing
 
-**Optional.** Nothing in this course requires it. We'll demonstrate it in class, and this page is here if you want to try it yourself.
+Running the agent inside a container, so that the only files it can reach are the ones for this course.
 
 ---
 
@@ -17,7 +18,38 @@ Codex is already fenced in by one setting: it can only write inside the folder y
 
 It has two gaps. The fence stops writes, not reads, so Codex can still read anything on your disk and send it to OpenAI. And anything Codex launches alongside itself, such as an MCP server you add later, starts outside the fence entirely.
 
-A container closes both by moving the wall down a layer. Codex runs inside a small Linux machine that contains only your project, so there's nothing else to read and everything it starts is inside too. Once the wall is real, you can turn Codex's own one off and it stops asking about anything at all.
+---
+
+## Why not just change Codex's settings?
+
+That is the obvious first move, and it nearly works.
+
+Codex keeps its settings in `~/.codex/config.toml`, and recent versions let you deny reads across the disk and then grant back only the paths you want:
+
+```toml
+[permissions.course.filesystem]
+":root" = "deny"                 # no reading anything, by default
+":workspace_roots" = "write"     # except the folder open in VS Code
+```
+
+The difficulty is everything you then have to grant back. Codex needs to see more than your project in order to work at all:
+
+- **Homebrew's tree**, where `uv` and everything it installs live. `/opt/homebrew` on an Apple Silicon Mac, `/usr/local` on an Intel one.
+- **The Python interpreter uv downloaded**, in `~/.local/share/uv` — inside your home directory, which we just denied.
+- **uv's package cache**, in `~/.cache/uv`, same problem.
+- **System libraries and temporary directories**, so that commands can run at all.
+
+Each one you miss turns into a command that fails for a reason the error message does not explain. You can work the full list out, and it does hold once you have. It takes an afternoon, the answer differs between machines, and it breaks again the next time a tool changes where it keeps things.
+
+So rather than enumerate everything the agent needs to see, we do the opposite: put the agent somewhere that contains only what it needs, and nothing else.
+
+---
+
+## The container
+
+A container moves the wall down a layer. Codex runs inside a small Linux machine holding your project and the tools to work on it, so there is no list to maintain: your documents, keys and other courses are not denied, they are simply not there. Anything Codex launches starts inside too, which closes the MCP gap as well.
+
+Once the wall is real, you can turn Codex's own one off and it stops asking about anything at all.
 
 About fifteen minutes, most of it one download.
 
@@ -68,7 +100,7 @@ That's a good use of an agent. Reading unfamiliar configuration is something it'
 
 In VS Code, with `~/fbe506` open:
 
-`Cmd+Shift+P`, then **Dev Containers: Reopen in Container**
+`⌘-Shift-P`, then **Dev Containers: Reopen in Container**
 
 The first build takes a few minutes while it downloads Linux and installs Python, uv and Codex into it. Rebuilds after that take seconds.
 
@@ -126,10 +158,10 @@ So the container protects your computer. Committing protects your homework. You 
 
 **No "Reopen in Container" in the Command Palette**: the Dev Containers extension didn't install. Run the `code --install-extension` line again.
 
-**The build fails**: `Cmd+Shift+P`, then **Dev Containers: Show Container Log**. The real error is at the bottom.
+**The build fails**: `⌘-Shift-P`, then **Dev Containers: Show Container Log**. The real error is at the bottom.
 
 **Everything is slow, or your fan is loud**: Docker Desktop reserves memory for the Linux machine. Its Settings, then Resources, controls how much.
 
-**You want out**: `Cmd+Shift+P`, then **Dev Containers: Reopen Folder Locally**. Your files are untouched, you're just back to running things on the Mac.
+**You want out**: `⌘-Shift-P`, then **Dev Containers: Reopen Folder Locally**. Your files are untouched, you're just back to running things on the Mac.
 
-**Something is wrecked and you don't know why**: `Cmd+Shift+P`, then **Dev Containers: Rebuild Container**. It throws the Linux machine away and builds a fresh one in about a minute. Your project folder isn't affected, because it was never inside the container to begin with. That's the advantage of working this way: a broken environment stops being something you debug.
+**Something is wrecked and you don't know why**: `⌘-Shift-P`, then **Dev Containers: Rebuild Container**. It throws the Linux machine away and builds a fresh one in about a minute. Your project folder isn't affected, because it was never inside the container to begin with. That's the advantage of working this way: a broken environment stops being something you debug.

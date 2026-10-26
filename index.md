@@ -11,10 +11,12 @@ So we move the work onto your own laptop. Python, a real editor, and a coding ag
 
 ## Start here
 
+[**Installing Local Python and Local AI**]({{ site.baseurl }}/install/) explains what we're installing and why it takes more than one download. Read it first, then pick your machine:
+
 | | |
 |---|---|
-| [Mac Setup]({{ site.baseurl }}/mac/) | Homebrew, Python, VS Code, Codex |
-| [PC Setup]({{ site.baseurl }}/windows/) | the same, with winget and PowerShell |
+| [Mac Setup]({{ site.baseurl }}/install/mac/) | Homebrew, Python, VS Code, Codex |
+| [PC Setup]({{ site.baseurl }}/install/windows/) | the same, with winget and PowerShell |
 
 Twenty minutes, mostly waiting for downloads. Do it before the first class that needs it, not during.
 
@@ -22,8 +24,8 @@ Twenty minutes, mostly waiting for downloads. Do it before the first class that 
 
 | | |
 |---|---|
-| [Python and uv]({{ site.baseurl }}/python/) | what the setup actually did, and how to debug it |
-| [Containers]({{ site.baseurl }}/containers/) | optional: running the agent inside a sandbox |
+| [Python Environments]({{ site.baseurl }}/optional/environments/) | what the setup actually did, and how to debug it |
+| [Better Sandboxing]({{ site.baseurl }}/optional/sandboxing/) | optional: running the agent inside a container |
 
 ## What you'll end up with
 

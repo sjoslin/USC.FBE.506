@@ -1,0 +1,23 @@
+// Catppuccin Latte for just-the-docs.
+// Palette: https://catppuccin.com/palette  (Latte)
+//
+// Loaded after color_schemes/light, so these plain assignments win over
+// the theme's !default values.
+
+$body-background-color:       #eff1f5;  // base
+$sidebar-color:               #e6e9ef;  // mantle
+$border-color:                #ccd0da;  // surface0
+
+$body-text-color:             #4c4f69;  // text
+$body-heading-color:          #4c4f69;  // text
+$nav-child-link-color:        #5c5f77;  // subtext1
+$search-result-preview-color: #6c6f85;  // subtext0
+
+$link-color:                  #1e66f5;  // blue
+$btn-primary-color:           #7287fd;  // lavender
+$base-button-color:           #e6e9ef;  // mantle
+
+$code-background-color:       #dce0e8;  // crust
+$feedback-color:              #dce0e8;  // crust
+$table-background-color:      #eff1f5;  // base
+$search-background-color:     #eff1f5;  // base

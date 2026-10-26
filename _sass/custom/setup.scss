@@ -1,0 +1,12 @@
+// Theme variable overrides. just-the-docs imports this before its own
+// variables and colour schemes, so anything set here wins.
+
+// Widths must be in rem: the theme adds them to $content-width (50rem),
+// and Sass refuses to add px to rem.
+//
+// Wider left nav. Defaults are 16.5rem / 15.5rem, which wrap titles like
+// "Installing Local Python and Local AI" onto three lines.
+$nav-width: 21rem;
+$nav-width-md: 20rem;
+
+// Colours live in _sass/color_schemes/catppuccin.scss.

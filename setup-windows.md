@@ -1,15 +1,16 @@
 ---
 title: PC Setup
+parent: Installing Local Python and Local AI
 layout: default
-nav_order: 2
-permalink: /windows/
+nav_order: 6
+permalink: /install/windows/
 ---
 
 # Setting Up Your PC
 
 By the end of this page you'll have Python, an editor, and an AI coding agent, all working together. About twenty minutes, most of it waiting for downloads.
 
-You don't need to understand what each command does. If you'd like to, [Python and uv]({{ site.baseurl }}/python/) explains the Python half.
+You don't need to understand what each command does. If you'd like to, [Python Environments]({{ site.baseurl }}/optional/environments/) explains the Python half.
 
 Open **PowerShell** (Start menu, type "PowerShell") and work down the page.
 
@@ -54,9 +55,13 @@ uv add pandas numpy matplotlib statsmodels scikit-learn `
 
 **Check:** `uv run python -c "print('hello world')"`
 
-Everything landed in `~\fbe506`. Nothing was installed system-wide, so none of this can break anything else, and deleting that folder undoes all of it.
+Your project is `~\fbe506`. The `.venv` folder inside it holds this project's Python and its packages, and that's what your code will use.
 
-[What just happened]({{ site.baseurl }}/python/)
+uv also keeps a shared download cache and its downloaded Python versions under `%LOCALAPPDATA%\uv`, outside the project. Both are shared across every project, which is why a second project costs almost no time or disk.
+
+What matters is that no package was installed into any Python that Windows manages, and nothing here is shared between projects in a way that can conflict. Delete `~\fbe506` and this project is gone. `uv cache clean` reclaims the cache if you ever want the space.
+
+[What just happened]({{ site.baseurl }}/optional/environments/)
 
 ---
 
@@ -78,8 +83,13 @@ winget install --id Microsoft.VisualStudioCode -e
 code --install-extension ms-python.python        # Python support
 code --install-extension ms-toolsai.jupyter      # notebooks in the editor
 code --install-extension ms-toolsai.datawrangler # point-and-click data cleaning
-code --install-extension charliermarsh.ruff      # flags mistakes as you type
+
+# Optional, but nicer to look at than the default.
+code --install-extension Catppuccin.catppuccin-vsc        # colour theme
+code --install-extension Catppuccin.catppuccin-vsc-icons  # matching file icons
 ```
+
+To switch to it: `Ctrl-Shift-P`, then **Preferences: Color Theme**, then **Catppuccin Latte** for light or **Catppuccin Mocha** for dark.
 
 **Data Wrangler** is the one you won't expect to like. Click any DataFrame and you get a spreadsheet view with a distribution and a missing-value count for every column. Clean it by clicking, and it writes the pandas code for what you did.
 
@@ -92,21 +102,7 @@ winget install --id OpenAI.Codex -e
 code --install-extension openai.chatgpt
 ```
 
-**Close PowerShell and open a new one.** Then write its settings file. Paste the whole block at once, and make sure the closing `'@` sits at the very start of its line with no spaces before it:
-
-```powershell
-New-Item -ItemType Directory -Force -Path "$HOME\.codex" | Out-Null
-
-@'
-sandbox_mode    = "workspace-write"
-approval_policy = "never"
-
-[sandbox_workspace_write]
-network_access = true
-'@ | Set-Content -Encoding utf8 "$HOME\.codex\config.toml"
-```
-
-Then sign in:
+**Close PowerShell and open a new one**, then sign in:
 
 ```powershell
 codex login
@@ -114,11 +110,7 @@ codex login
 
 This opens a browser. **Choose the USC workspace, not a personal account.** USC's plan gives you 6,500 credits a month. A personal account gives you a free-tier trickle that runs out around week three.
 
-Those three settings are the important part of this page:
-
-- **`workspace-write`**: Codex can read anything, but can only *write* inside the folder you have open. It can't touch the rest of your PC.
-- **`approval_policy = "never"`**: it won't interrupt you to ask permission, because the line above already answered the question.
-- **`network_access = true`**: it can reach the internet, which it needs for every data download in this course.
+Out of the box Codex can only *write* inside the folder you have open, which the operating system enforces. But it can *read* anything on your computer. That is a fairly weak sandbox. [Better Sandboxing]({{ site.baseurl }}/optional/sandboxing/) shows how to run the agent inside a container instead, where the rest of your files are not there to be read.
 
 ---
 
@@ -130,7 +122,7 @@ code ~\fbe506
 
 By hand, once, so you know what the pieces are:
 
-1. `Ctrl+Shift+P`, then **Create: New Jupyter Notebook**
+1. `Ctrl-Shift-P`, then **Create: New Jupyter Notebook**
 2. Top right, the kernel should already say **.venv**. If it doesn't, click it and choose the one ending in `.venv\Scripts\python.exe`.
 3. First cell: `import pandas as pd` then `print(pd.__version__)`. Press `Shift+Enter`.
 4. Save it as `hello.ipynb`.
@@ -149,13 +141,9 @@ That's the setup. You're done.
 
 **`'uv' is not recognized`** (or `code`, or `codex`): you're in the PowerShell window you had open before installing it. Close it and open a new one.
 
-**A notebook says pandas isn't installed**: it's running the wrong Python. Click the kernel name in the top right and choose the one ending in `.venv\Scripts\python.exe`. ([why]({{ site.baseurl }}/python/#which-python-am-i-running))
-
-**The `@'` block gave an error**: the closing `'@` has to be at the very beginning of a line, with nothing before it. Re-paste the whole block.
+**A notebook says pandas isn't installed**: it's running the wrong Python. Click the kernel name in the top right and choose the one ending in `.venv\Scripts\python.exe`. ([why]({{ site.baseurl }}/optional/environments/#which-python-am-i-running))
 
 **Codex stops to ask permission**: the settings file didn't load. Confirm it exists with `type $HOME\.codex\config.toml`, then quit and reopen VS Code.
-
-**Codex writes files but can't download anything**: `network_access = true` is missing from that file.
 
 **You need a package that isn't installed**: `uv add <name>` in PowerShell, from inside `~\fbe506`. Then restart the notebook's kernel.
 

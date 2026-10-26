@@ -1,0 +1,25 @@
+// Catppuccin Frappé for just-the-docs.
+// Palette: https://catppuccin.com/palette  (Frappé)
+//
+// Builds on the theme's dark scheme, which brings the github-dark syntax
+// highlighting with it. Without that the code tokens would still be the
+// light-background palette and unreadable here.
+@import "color_schemes/dark";
+
+$body-background-color:       #303446;  // base
+$sidebar-color:               #292c3c;  // mantle
+$border-color:                #414559;  // surface0
+
+$body-text-color:             #c6d0f5;  // text
+$body-heading-color:          #c6d0f5;  // text
+$nav-child-link-color:        #b5bfe2;  // subtext1
+$search-result-preview-color: #a5adce;  // subtext0
+
+$link-color:                  #8caaee;  // blue
+$btn-primary-color:           #babbf1;  // lavender
+$base-button-color:           #414559;  // surface0
+
+$code-background-color:       #292c3c;  // mantle
+$feedback-color:              #292c3c;  // mantle
+$table-background-color:      #303446;  // base
+$search-background-color:     #292c3c;  // mantle
