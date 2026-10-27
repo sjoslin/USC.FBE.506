@@ -11,7 +11,7 @@ So we move the work onto your own laptop. Python, a real editor, and a coding ag
 
 ## Start here
 
-[**Setup Overview**]({{ site.baseurl }}/install/) explains what we're installing and why it takes more than one download. Read it first, then pick your machine:
+[**Overview**]({{ site.baseurl }}/overview/) explains what we're installing and why it takes more than one download. Read it first, then pick your machine:
 
 | | |
 |---|---|
@@ -24,13 +24,12 @@ Twenty minutes, mostly waiting for downloads. Do it before the first class that 
 
 | | |
 |---|---|
-| [Python Environments]({{ site.baseurl }}/optional/environments/) | what the setup actually did, and how to debug it |
 | [Better Sandboxing]({{ site.baseurl }}/optional/sandboxing/) | optional: running the agent inside a container |
 
 ## What you'll end up with
 
 A folder that holds your work, its own copy of Python, and every package this course uses. An editor that runs notebooks, shows you your data, and hosts an AI agent in the sidebar.
 
-That agent can read your files, write code, and run it, without asking permission each time. It also can't write anywhere outside the folder you've opened. Both of those are settings you'll make deliberately in step 4, and knowing why they're set that way is part of the point.
+That agent can read your files, write code, and run it. Its normal working boundary is the folder you have opened. With approvals enabled, Codex can ask for permission to write outside that folder and can do so only if you approve. See the [OpenAI sandbox documentation](https://learn.chatgpt.com/docs/sandboxing) for the current defaults and options.
 
 Colab still works. Nothing here takes it away.

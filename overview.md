@@ -3,7 +3,7 @@ title: Overview
 layout: default
 nav_order: 1
 has_children: true
-permalink: /install/
+permalink: /overview/
 ---
 
 # Overview
@@ -38,9 +38,9 @@ Start with the overviews, then follow the setup instructions for your computer a
 
 | Page | What it covers |
 |---|---|
-| [Local Python Overview]({{ site.baseurl }}/install/python/) | Python, packages, environments, and uv |
-| [VS Code Overview]({{ site.baseurl }}/install/vscode/) | the editor and its extensions |
-| [Codex Overview]({{ site.baseurl }}/install/codex/) | coding agents and their permissions |
+| [Local Python Overview]({{ site.baseurl }}/overview/python/) | Python, packages, environments, and uv |
+| [VS Code Overview]({{ site.baseurl }}/overview/vscode/) | the editor and its extensions |
+| [Codex Overview]({{ site.baseurl }}/overview/codex/) | coding agents and their permissions |
 | [Mac Setup]({{ site.baseurl }}/install/mac/) | installation on macOS |
 | [PC Setup]({{ site.baseurl }}/install/windows/) | installation on Windows |
 | [Using VS Code for Python]({{ site.baseurl }}/install/vscode/python/) | the shared workflow after installation |

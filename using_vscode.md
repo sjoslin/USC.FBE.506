@@ -11,22 +11,25 @@ After [Mac Setup]({{ site.baseurl }}/install/mac/) or [PC Setup]({{ site.baseurl
 
 ## Open your project
 
-Choose **File → Open Folder** and open your course folder (`fbe506` if you used the setup instructions). Open the folder rather than just a notebook so you can see the project's files and its `.venv` environment together.
+Choose **File → Open Folder** and open your course folder (`fbe506` if you used the setup instructions). Open the folder rather than just a notebook so you can see all of the project's files.
 
 ## The parts of the window
 
-![VS Code with the Explorer on the left, a notebook in the center, the terminal below, and Codex on the right.]({{ site.baseurl }}/assets/images/vscode-window.png)
+<div class="vscode-window-figure">
+  <img src="{{ site.baseurl }}/assets/images/vscode-window-annotated.png" alt="Annotated VS Code window: 1 Activity bar, 2 Explorer, 3 editor, 4 terminal, 5 Codex panel, 6 status bar, and 7 notebook kernel picker.">
+  <span class="vscode-kernel-outline" aria-hidden="true"></span>
+  <span class="vscode-kernel-label" aria-hidden="true">7</span>
+</div>
 
-- **Activity bar:** the strip of icons at the far left. Use these to switch between files, search, source control, and extensions.
-- **Explorer:** the file list on the left. It shows the folder you opened, including your notebooks and `.venv`.
-- **Editor:** the main area in the center. Files open in tabs; notebooks have cells you can run individually.
-- **Terminal:** the panel below the editor. Open it with **Terminal → New Terminal** to run commands in your project folder.
-- **Codex panel:** the assistant shown on the right in this screenshot. Its position can vary with your layout.
-- **Status bar:** the strip along the bottom. When a Python script is active, it includes the selected interpreter. A notebook has its own kernel picker at the top right.
+- <span class="ui-key ui-key--activity">1</span> **Activity bar:** the strip of icons at the far left. Use to switch between files, search, source control, and add extensions.
+- <span class="ui-key ui-key--explorer">2</span> **Explorer:** the file list on the left (if open).
+- <span class="ui-key ui-key--editor">3</span> **Editor:** the main area in the center. Files open in tabs. You can run cells in a Python notebook.
+- <span class="ui-key ui-key--terminal">4</span> **Terminal:** the panel below the editor (if open). Open it with **Terminal → New Terminal**.
+- <span class="ui-key ui-key--codex">5</span> **Codex panel:** the coding assistant shown on the right.
+- <span class="ui-key ui-key--status">6</span> **Status bar:** the strip along the bottom with information about the current state.
+- <span class="ui-key ui-key--kernel">7</span> **Notebook kernel picker:** the control at the top right of a notebook. It says **Select Kernel** until you choose one, then shows the selected Python environment.
 
-You can move panels and resize them by dragging their borders. Your window does not have to match this arrangement exactly.
-
-## Create your first notebook
+## Creating a notebook
 
 1. Open the **Command Palette** with `⌘-Shift-P` on Mac or `Ctrl-Shift-P` on Windows. Search for **Create: New Jupyter Notebook**.
 2. Click **Select Kernel** at the top right (or click the current kernel's name). Choose **Select Another Kernel → Python Environments** if needed.
@@ -44,7 +47,7 @@ print("hello world!")
 print(pd.__version__)
 ```
 
-Press `Shift-Enter` to run the cell, then save the notebook as `hello.ipynb` in your project folder.
+Press `Shift-Enter` to run the cell. The new notebook may initially be named `Untitled-1.ipynb`. The first time you save it with `⌘-S` on Mac or `Ctrl-S` on Windows, VS Code asks you for a filename. Choose your project folder, enter `hello.ipynb`, and click **Save**.
 
 If `.venv` is missing from the picker, open **Terminal → New Terminal** and run this from the project folder:
 
@@ -64,7 +67,7 @@ VS Code may activate `.venv` automatically in a new terminal. To run your projec
 uv run python -c "import sys; print(sys.executable)"
 ```
 
-The printed path should point inside your project's `.venv`. See [Python Environments]({{ site.baseurl }}/optional/environments/#which-python-am-i-running) for more detail.
+The printed path should point inside your project's `.venv`.
 
 ## Add packages
 
@@ -82,15 +85,16 @@ Open the **Codex** panel and try a small task:
 
 > Create a Python notebook that prints "hello world!" and explain how I can run it.
 
-Open the resulting file, check the selected kernel, and run the cells yourself. The [Codex Overview]({{ site.baseurl }}/install/codex/) explains the assistant in more detail.
+Open the resulting file, check the selected kernel, and run the cells yourself. The [Codex Overview]({{ site.baseurl }}/overview/codex/) explains the assistant in more detail.
 
 ## Useful shortcuts
 
 | Action | Mac | Windows |
 |---|---|---|
 | Command Palette | `⌘-Shift-P` | `Ctrl-Shift-P` |
-| Find a file by name | `⌘-P` | `Ctrl-P` |
-| Save | `⌘-S` | `Ctrl-S` |
+| Open a file by name | `⌘-P` | `Ctrl-P` |
+| Show or hide the Explorer sidebar | `⌘-B` | `Ctrl-B` |
+| Show or hide the terminal | `` Ctrl-` `` | `` Ctrl-` `` |
 | Run a notebook cell | `Shift-Enter` | `Shift-Enter` |
 
 ## When something breaks

@@ -1,5 +1,5 @@
 // Theme variable overrides. just-the-docs imports this before its own
-// variables and colour schemes, so anything set here wins.
+// variables and color schemes, so anything set here wins.
 
 // Widths must be in rem: the theme adds them to $content-width (50rem),
 // and Sass refuses to add px to rem.
@@ -9,4 +9,4 @@
 $nav-width: 21rem;
 $nav-width-md: 20rem;
 
-// Colours live in _sass/color_schemes/catppuccin.scss.
+// Colors live in _sass/color_schemes/catppuccin.scss.

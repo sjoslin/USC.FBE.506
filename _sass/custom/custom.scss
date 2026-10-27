@@ -26,8 +26,8 @@ pre.highlight code {
 }
 
 // A left edge on block code, so it reads differently from `inline code`,
-// which shares the same background colour. Uses the active scheme's border
-// colour so it works on a light or a dark flavour.
+// which shares the same background color. Uses the active scheme's border
+// color so it works with a light or dark flavor.
 div.highlighter-rouge,
 figure.highlight {
   border-left: 3px solid $border-color;
@@ -37,4 +37,70 @@ blockquote {
   border-left: 3px solid $border-color;
   padding-left: 1rem;
   margin-left: 0;
+}
+
+// Numbered keys used to connect annotated interface screenshots to their
+// descriptions. The number carries the meaning; color is a secondary cue.
+.ui-key {
+  align-items: center;
+  border-radius: 0.3rem;
+  color: #11111b;
+  display: inline-flex;
+  font-size: 0.8rem;
+  font-weight: 700;
+  height: 1.3rem;
+  justify-content: center;
+  line-height: 1;
+  margin-right: 0.35rem;
+  vertical-align: -0.15rem;
+  width: 1.3rem;
+}
+
+.ui-key--activity { background-color: #f38ba8; }
+.ui-key--explorer { background-color: #89b4fa; }
+.ui-key--editor { background-color: #a6e3a1; }
+.ui-key--terminal { background-color: #fab387; }
+.ui-key--codex { background-color: #cba6f7; }
+.ui-key--status { background-color: #f9e2af; }
+.ui-key--kernel { background-color: #89dceb; }
+
+// Add the kernel-picker annotation without changing the original screenshot.
+.vscode-window-figure {
+  line-height: 0;
+  position: relative;
+}
+
+.vscode-window-figure img {
+  display: block;
+  width: 100%;
+}
+
+.vscode-kernel-outline {
+  border: 0.18rem solid #22d3ee;
+  border-radius: 0.4rem;
+  box-sizing: border-box;
+  height: 3.1%;
+  left: 73.5%;
+  position: absolute;
+  top: 7.7%;
+  width: 7.8%;
+}
+
+.vscode-kernel-label {
+  align-items: center;
+  aspect-ratio: 1;
+  background-color: #89dceb;
+  border: 0.12rem solid #11111b;
+  border-radius: 0.4rem;
+  box-sizing: border-box;
+  color: #11111b;
+  display: flex;
+  font-size: clamp(0.55rem, 1.4vw, 1rem);
+  font-weight: 700;
+  justify-content: center;
+  left: 70.9%;
+  line-height: 1;
+  position: absolute;
+  top: 7.3%;
+  width: 2.4%;
 }

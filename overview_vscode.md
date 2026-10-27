@@ -3,7 +3,7 @@ title: VS Code Overview
 parent: Overview
 layout: default
 nav_order: 2
-permalink: /install/vscode/
+permalink: /overview/vscode/
 ---
 
 # VS Code Overview
@@ -14,7 +14,7 @@ Visual Studio Code, usually called **VS Code**, is a free text editor from Micro
 
 Microsoft [released the first preview in 2015](https://code.visualstudio.com/blogs/2016/04/14/vscode-1.0/).
 
-Microsoft develops VS Code in the [**Visual Studio Code - Open Source** repository](https://github.com/microsoft/vscode) on GitHub. Other developers can fork this repository and adapt the code to create their own editors; [Cursor](https://www.cursor.com/security) is one example.
+Microsoft develops VS Code in the [**Visual Studio Code - Open Source** repository](https://github.com/microsoft/vscode) on GitHub. Other developers can fork this repository and adapt the code to create their own editors and distributions. Examples include [Cursor](https://www.cursor.com/security), [Google Antigravity](https://antigravity.google/product/antigravity-ide), and [VSCodium](https://vscodium.com/) (a version of VS Code without Microsoft telemetry).
 
 ## Adding capabilities with extensions
 
@@ -30,7 +30,7 @@ For this course, we use:
 | **Codex** | An AI coding assistant alongside your files |
 | **Catppuccin** (optional) | Color themes and file icons |
 
-Installing an extension adds capabilities to the editor. Python itself and the packages your code imports are installed separately, using uv. The [Local Python Overview]({{ site.baseurl }}/install/python/) explains that part of the setup.
+Installing an extension adds capabilities to the editor. Python itself and the packages your code imports are installed separately, using uv. The [Local Python Overview]({{ site.baseurl }}/overview/python/) explains that part of the setup.
 
 ## Why we use it
 

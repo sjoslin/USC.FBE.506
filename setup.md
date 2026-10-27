@@ -17,4 +17,4 @@ Follow the instructions for your computer, then continue with the shared VS Code
 
 After installation, continue with [Using VS Code for Python]({{ site.baseurl }}/install/vscode/python/) for the window tour and everyday workflow.
 
-For an explanation of the tools, start with the [Overview]({{ site.baseurl }}/install/).
+For an explanation of the tools, start with the [Overview]({{ site.baseurl }}/overview/).

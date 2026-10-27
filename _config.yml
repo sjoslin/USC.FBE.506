@@ -6,6 +6,9 @@ color_scheme: catppuccin-frappe
 url: https://sjoslin.github.io
 baseurl: /USC.FBE.506
 
+exclude:
+  - tmp
+
 mermaid:
   version: "10.9.0"
 

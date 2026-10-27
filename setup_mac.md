@@ -8,7 +8,7 @@ permalink: /install/mac/
 
 # Mac Setup
 
-Open **Terminal** (`⌘-Space`, type "Terminal"). Click in the upper right of each box to select and copy the text. Then paste it into terminal and hit enter.
+Open **Terminal** (`⌘-Space`, type "Terminal"). Click in the upper right of each box to select and copy the text. Then paste it into Terminal and press Enter.
 
 Mac's default shell, zsh, needs this setting to accept the explanatory `#` comments in the commands below. Run it once in each new terminal before pasting commands with comments:
 
@@ -18,13 +18,13 @@ setopt interactivecomments
 
 There is a check at the end of each step. If a check fails, stop and paste the error message and the command into an AI, and have it help you solve it.
 
-[Setup Overview]({{ site.baseurl }}/install/) describes what we are installing and why.
+[Overview]({{ site.baseurl }}/overview/) describes what we are installing and why.
 
 ---
 
 ## 0. Homebrew
 
-Homebrew is a package manager that helps install software for Mac. Brew makes it much easier than downloading and installing a bunch of dmg files (and works for things not in the app store.)
+Homebrew is a package manager that helps install software for Mac. Brew makes it much easier than downloading and installing a bunch of `.dmg` files (and works for things not in the App Store).
 
 ```bash
 # Download and run Homebrew's installer.
@@ -68,8 +68,6 @@ Running `uv add` also creates the virtual environment (the `.venv` folder) that 
 
 **Check:** `ls -a` should show `.venv`. Then `uv run python -c "print('hello world')"` should print `hello world`.
 
-[Why do we install uv and not just Python?]({{ site.baseurl }}/optional/environments/)
-
 ---
 
 ## 2. VS Code
@@ -84,7 +82,7 @@ brew install --cask visual-studio-code
 
 ## 3. Extensions
 
-Now we will install several VS Code extensions. You can also install these manually in VS Code by using the extensions menu (the four-square icon with one square tilted, or `⌘-Shift-X`)
+Now we will install several VS Code extensions. You can also install these manually in VS Code by using the Extensions menu (the four-square icon with one square tilted, or `⌘-Shift-X`).
 
 ```bash
 code --install-extension ms-python.python        # Python support
@@ -92,7 +90,7 @@ code --install-extension ms-toolsai.jupyter      # Use Python notebooks
 code --install-extension ms-toolsai.datawrangler # point-and-click data cleaning
 
 # Optional, but nicer to look at than the default.
-code --install-extension Catppuccin.catppuccin-vsc        # colour theme
+code --install-extension Catppuccin.catppuccin-vsc        # color theme
 code --install-extension Catppuccin.catppuccin-vsc-icons  # matching file icons
 ```
 
@@ -115,7 +113,7 @@ codex login                                 # sign in
 
 `codex login` opens a browser for you to authenticate.
 
-Out of the box Codex can only _write_ inside the folder you have open, which the operating system enforces. But it can _read_ anything on your computer. That is a fairly weak sandbox. [Better Sandboxing]({{ site.baseurl }}/optional/sandboxing/) shows how to run the agent inside a container instead, where the rest of your files are not there to be read.
+Codex normally writes only inside the folder you have open. With approvals enabled, it can ask for permission to write outside that folder and can do so only if you approve. The active permissions profile also determines what Codex can read and whether commands can use the network. See the [OpenAI sandbox documentation](https://learn.chatgpt.com/docs/sandboxing) for the current defaults and options. [Better Sandboxing]({{ site.baseurl }}/optional/sandboxing/) will describe how to isolate the agent further.
 
 **Check:** the Codex icon appears in VS Code's left sidebar.
 

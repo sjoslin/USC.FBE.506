@@ -8,60 +8,55 @@ permalink: /install/windows/
 
 # Setting Up Your PC
 
-By the end of this page you'll have Python, an editor, and an AI coding agent, all working together. About twenty minutes, most of it waiting for downloads.
+**Disclaimer:** I use a Mac, so this is an AI translation of the Mac instructions to Windows.
 
-You don't need to understand what each command does. If you'd like to, [Python Environments]({{ site.baseurl }}/optional/environments/) explains the Python half.
+Open **PowerShell** (open the Start menu and type "PowerShell"). Click in the upper right of each box to select and copy the text. Then paste it into PowerShell and press Enter.
 
-Open **PowerShell** (Start menu, type "PowerShell") and work down the page.
+There is a check at the end of each step. If a check fails, stop and paste the error message and the command into an AI, and have it help you solve it.
 
-> **After every install, close PowerShell and open a new one.** Windows only notices a newly installed command in a fresh window. This is the single most common reason a step appears not to work.
+[Overview]({{ site.baseurl }}/overview/) describes what we are installing and why.
 
 ---
 
 ## 0. Check winget
 
-Windows installs software from the command line with `winget`, which is already on your PC.
+Windows installs software from the command line with `winget`, which is normally already on your PC.
 
 ```powershell
 winget --version
 ```
 
-If that fails, install **App Installer** from the Microsoft Store and try again.
+**Check:** `winget --version` prints a version number. If it does not, install **App Installer** from the Microsoft Store and try again.
 
 ---
 
 ## 1. Python
 
+First, install uv:
+
 ```powershell
-# uv manages Python itself, this project's packages, and the folder
-# that keeps them separate from everything else on your PC.
-winget install --id astral-sh.uv -e
+winget install --id astral-sh.uv -e # uv manages Python and its libraries
 ```
 
-**Close PowerShell and open a new one.** Then:
+Close PowerShell and open a new PowerShell window so that Windows can find uv. Then run the commands below, replacing `~\fbe506` with whatever directory you want to use.
 
 ```powershell
-# The folder all your course work will live in.
-mkdir ~\fbe506
+mkdir ~\fbe506                    # create the folder for your work
 cd ~\fbe506
 
-# Mark this folder as a project, using Python 3.12.
-uv init --python 3.12
+uv init --python 3.12 --no-package # mark the folder as a Python project (once)
 
-# Install the packages this course uses. The backtick continues the line.
-uv add pandas numpy matplotlib statsmodels scikit-learn `
-       yfinance pandas-datareader jupyter openpyxl
+uv add pandas numpy              # tables and numerical calculations; creates .venv
+uv add matplotlib                # charts and plots
+uv add statsmodels scikit-learn  # statistics and machine learning
+uv add yfinance pandas-datareader # download financial and economic data
+uv add openpyxl                  # read and write Excel .xlsx files
+uv add jupyter ipykernel         # Jupyter tools and the kernel for VS Code notebooks
 ```
 
-**Check:** `uv run python -c "print('hello world')"`
+Running `uv add` also creates the virtual environment (the `.venv` folder) that contains your project's Python interpreter and installed packages. The `.python-version` file records which Python version the project should use.
 
-Your project is `~\fbe506`. The `.venv` folder inside it holds this project's Python and its packages, and that's what your code will use.
-
-uv also keeps a shared download cache and its downloaded Python versions under `%LOCALAPPDATA%\uv`, outside the project. Both are shared across every project, which is why a second project costs almost no time or disk.
-
-What matters is that no package was installed into any Python that Windows manages, and nothing here is shared between projects in a way that can conflict. Delete `~\fbe506` and this project is gone. `uv cache clean` reclaims the cache if you ever want the space.
-
-[What just happened]({{ site.baseurl }}/optional/environments/)
+**Check:** `Get-ChildItem -Force` should show `.venv`. Then `uv run python -c "print('hello world')"` should print `hello world`.
 
 ---
 
@@ -71,60 +66,67 @@ What matters is that no package was installed into any Python that Windows manag
 winget install --id Microsoft.VisualStudioCode -e
 ```
 
-**Close PowerShell and open a new one.**
+Close PowerShell and open a new PowerShell window.
 
-**Check:** `code --version`
+**Check:** `code --version` prints the version number. Also open the app from the Start menu, or type `code` in PowerShell.
 
 ---
 
 ## 3. Extensions
 
+Now we will install several VS Code extensions. You can also install these manually in VS Code by using the Extensions menu (the four-square icon with one square tilted, or `Ctrl-Shift-X`).
+
 ```powershell
 code --install-extension ms-python.python        # Python support
-code --install-extension ms-toolsai.jupyter      # notebooks in the editor
+code --install-extension ms-toolsai.jupyter      # Use Python notebooks
 code --install-extension ms-toolsai.datawrangler # point-and-click data cleaning
 
 # Optional, but nicer to look at than the default.
-code --install-extension Catppuccin.catppuccin-vsc        # colour theme
+code --install-extension Catppuccin.catppuccin-vsc        # color theme
 code --install-extension Catppuccin.catppuccin-vsc-icons  # matching file icons
 ```
 
-To switch to it: `Ctrl-Shift-P`, then **Preferences: Color Theme**, then **Catppuccin Latte** for light or **Catppuccin Mocha** for dark.
+To switch to the color theme: `Ctrl-Shift-P`, then **Preferences: Color Theme**, then **Catppuccin Latte** for light, or **Catppuccin Frappé** or **Catppuccin Mocha** for dark. For the icons, `Ctrl-Shift-P`, then **Preferences: File Icon Theme**.
 
-**Data Wrangler** is the one you won't expect to like. Click any DataFrame and you get a spreadsheet view with a distribution and a missing-value count for every column. Clean it by clicking, and it writes the pandas code for what you did.
+**Data Wrangler** helps us view DataFrames. We can also edit them in place.
+
+**Check:** open VS Code. The Extensions panel (`Ctrl-Shift-X`) lists all five under Installed.
 
 ---
 
 ## 4. Codex
 
 ```powershell
-winget install --id OpenAI.Codex -e
-code --install-extension openai.chatgpt
+winget install --id Git.Git -e              # version control used by Codex
+irm https://chatgpt.com/codex/install.ps1 | iex # the Codex command-line tool
+code --install-extension openai.chatgpt     # its VS Code panel
 ```
 
-**Close PowerShell and open a new one**, then sign in:
+Close PowerShell and open a new PowerShell window, then sign in:
 
 ```powershell
 codex login
 ```
 
-This opens a browser. **Choose the USC workspace, not a personal account.** USC's plan gives you 6,500 credits a month. A personal account gives you a free-tier trickle that runs out around week three.
+`codex login` opens a browser for you to authenticate.
 
-Out of the box Codex can only *write* inside the folder you have open, which the operating system enforces. But it can *read* anything on your computer. That is a fairly weak sandbox. [Better Sandboxing]({{ site.baseurl }}/optional/sandboxing/) shows how to run the agent inside a container instead, where the rest of your files are not there to be read.
+Codex runs directly in PowerShell and uses the native Windows sandbox. You do not need to install WSL2. Keep **Ask for approval** selected so that Codex stays within the sandbox and asks before doing anything that needs broader access. With your approval, Codex can write outside the open project. See the [OpenAI sandbox documentation](https://learn.chatgpt.com/docs/sandboxing) for the current defaults and options.
+
+**Check:** `codex --version` prints a version number, and the Codex icon appears in VS Code's left sidebar.
 
 ---
 
 ## When something breaks
 
-**`'uv' is not recognized`** (or `code`, or `codex`): you're in the PowerShell window you had open before installing it. Close it and open a new one.
+**`uv`, `code`, or `codex` is not recognized:** close PowerShell and open a new window. Windows may not make a newly installed command available to PowerShell windows that were already open.
 
-**Codex stops to ask permission**: the settings file didn't load. Confirm it exists with `type $HOME\.codex\config.toml`, then quit and reopen VS Code.
+**Codex asks for permission:** this is normal. The sandbox is stopping Codex before it accesses something outside the project or uses a restricted resource. Read the request before approving it.
 
 ---
 
-## A note on WSL
+## Why these instructions do not use WSL2
 
-Older guides tell you to install the Windows Subsystem for Linux first. You don't need it. Codex runs natively on Windows with a real sandbox, and everything in this course works in plain PowerShell.
+WSL2 gives Windows a Linux environment, but this course does not need one. Python, uv, VS Code, and Codex all run directly on Windows. Codex also provides a native Windows sandbox when it runs in PowerShell.
 
 ## Next
 
