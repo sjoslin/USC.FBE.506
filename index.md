@@ -11,7 +11,7 @@ So we move the work onto your own laptop. Python, a real editor, and a coding ag
 
 ## Start here
 
-[**Installing Local Python and Local AI**]({{ site.baseurl }}/install/) explains what we're installing and why it takes more than one download. Read it first, then pick your machine:
+[**Setup Overview**]({{ site.baseurl }}/install/) explains what we're installing and why it takes more than one download. Read it first, then pick your machine:
 
 | | |
 |---|---|

@@ -1,18 +1,24 @@
 ---
-title: Mac Setup (Steps)
-parent: Installing Local Python and Local AI
+title: Mac Setup
+parent: Setup
 layout: default
-nav_order: 5
-permalink: /install/mac/steps/
+nav_order: 1
+permalink: /install/mac/
 ---
 
-# Mac Setup: The Steps
+# Mac Setup
 
 Open **Terminal** (`⌘-Space`, type "Terminal"). Click in the upper right of each box to select and copy the text. Then paste it into terminal and hit enter.
 
-Each step ends with a check. If a check fails, stop and paste the error message and the command into an AI, and have it help you solve it.
+Mac's default shell, zsh, needs this setting to accept the explanatory `#` comments in the commands below. Run it once in each new terminal before pasting commands with comments:
 
-[Mac Setup (Overview)]({{ site.baseurl }}/install/mac/) describes what is going on and what we are trying to install.
+```zsh
+setopt interactivecomments
+```
+
+There is a check at the end of each step. If a check fails, stop and paste the error message and the command into an AI, and have it help you solve it.
+
+[Setup Overview]({{ site.baseurl }}/install/) describes what we are installing and why.
 
 ---
 
@@ -36,22 +42,31 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 ## 1. Python
 
-Run the commands below, replacing `~/fbe506` with whatever directory you want to use.
+First, install uv:
 
 ```bash
 brew install uv                  # uv manages Python and its libraries
-
-mkdir ~/fbe506                   # create the folder for your work
-cd ~/fbe506
-
-uv init --python 3.12            # mark the folder as a Python project
-
-# Install some packages
-uv add pandas numpy matplotlib statsmodels scikit-learn \
-       yfinance pandas-datareader jupyter openpyxl
 ```
 
-**Check:** `uv run python -c "print('hello world')"`
+Then run the commands below, replacing `~/fbe506` with whatever directory you want to use.
+
+```bash
+mkdir -p ~/fbe506                # create the folder for your work
+cd ~/fbe506
+
+uv init --python 3.12 --no-package # mark the folder as a Python project (once)
+
+uv add pandas numpy             # tables and numerical calculations; creates .venv
+uv add matplotlib               # charts and plots
+uv add statsmodels scikit-learn # statistics and machine learning
+uv add yfinance pandas-datareader # download financial and economic data
+uv add openpyxl                 # read and write Excel .xlsx files
+uv add jupyter ipykernel        # Jupyter tools and the kernel for VS Code notebooks
+```
+
+Running `uv add` also creates the virtual environment (the `.venv` folder) that contains your project's Python interpreter and installed packages. The `.python-version` file records which Python version the project should use.
+
+**Check:** `ls -a` should show `.venv`. Then `uv run python -c "print('hello world')"` should print `hello world`.
 
 [Why do we install uv and not just Python?]({{ site.baseurl }}/optional/environments/)
 
@@ -100,35 +115,12 @@ codex login                                 # sign in
 
 `codex login` opens a browser for you to authenticate.
 
-Out of the box Codex can only *write* inside the folder you have open, which the operating system enforces. But it can *read* anything on your computer. That is a fairly weak sandbox. [Better Sandboxing]({{ site.baseurl }}/optional/sandboxing/) shows how to run the agent inside a container instead, where the rest of your files are not there to be read.
+Out of the box Codex can only _write_ inside the folder you have open, which the operating system enforces. But it can _read_ anything on your computer. That is a fairly weak sandbox. [Better Sandboxing]({{ site.baseurl }}/optional/sandboxing/) shows how to run the agent inside a container instead, where the rest of your files are not there to be read.
 
 **Check:** the Codex icon appears in VS Code's left sidebar.
 
 ---
 
-## 5. Your first notebook
+## Next
 
-```bash
-code ~/fbe506
-```
-
-By hand, once, so you know what the pieces are:
-
-1. `⌘-Shift-P`, then **Create: New Jupyter Notebook**
-2. Top right, the kernel should already say **.venv**. If it doesn't, click it and choose the one ending in `.venv/bin/python`.
-3. First cell: `import pandas as pd` then `print("hello world!")`. Press `Shift+Enter`.
-4. Save it as `hello.ipynb`.
-
-Then we can write a sample file using the agent. In the **Codex** panel:
-
-> make a new Python notebook that prints "hello world!!" then execute it.
-
----
-
-## When something breaks
-
-**A notebook says pandas isn't installed**: it's running the wrong Python. Click the kernel name in the top right and choose the one ending in `.venv/bin/python`. ([why]({{ site.baseurl }}/optional/environments/#which-python-am-i-running))
-
-**`python` doesn't work in Terminal**: use VS Code's built-in terminal rather than a Terminal window. ([why]({{ site.baseurl }}/optional/environments/#which-python-am-i-running))
-
-**You need a package that isn't installed**: `uv add <name>` in Terminal, from inside your directory. Then restart the kernel.
+[Using VS Code for Python]({{ site.baseurl }}/install/vscode/python/)

@@ -1,8 +1,8 @@
 ---
 title: PC Setup
-parent: Installing Local Python and Local AI
+parent: Setup
 layout: default
-nav_order: 6
+nav_order: 2
 permalink: /install/windows/
 ---
 
@@ -114,41 +114,18 @@ Out of the box Codex can only *write* inside the folder you have open, which the
 
 ---
 
-## 5. Your first notebook
-
-```powershell
-code ~\fbe506
-```
-
-By hand, once, so you know what the pieces are:
-
-1. `Ctrl-Shift-P`, then **Create: New Jupyter Notebook**
-2. Top right, the kernel should already say **.venv**. If it doesn't, click it and choose the one ending in `.venv\Scripts\python.exe`.
-3. First cell: `import pandas as pd` then `print(pd.__version__)`. Press `Shift+Enter`.
-4. Save it as `hello.ipynb`.
-
-Then the same job with the agent. In the **Codex** panel:
-
-> make a new notebook that downloads the last year of SPY prices and plots the closing price
-
-It writes the file, runs it, and shows you the result. It never stops to ask permission, and it can't write anywhere outside `~\fbe506`.
-
-That's the setup. You're done.
-
----
-
 ## When something breaks
 
 **`'uv' is not recognized`** (or `code`, or `codex`): you're in the PowerShell window you had open before installing it. Close it and open a new one.
 
-**A notebook says pandas isn't installed**: it's running the wrong Python. Click the kernel name in the top right and choose the one ending in `.venv\Scripts\python.exe`. ([why]({{ site.baseurl }}/optional/environments/#which-python-am-i-running))
-
 **Codex stops to ask permission**: the settings file didn't load. Confirm it exists with `type $HOME\.codex\config.toml`, then quit and reopen VS Code.
-
-**You need a package that isn't installed**: `uv add <name>` in PowerShell, from inside `~\fbe506`. Then restart the notebook's kernel.
 
 ---
 
 ## A note on WSL
 
 Older guides tell you to install the Windows Subsystem for Linux first. You don't need it. Codex runs natively on Windows with a real sandbox, and everything in this course works in plain PowerShell.
+
+## Next
+
+[Using VS Code for Python]({{ site.baseurl }}/install/vscode/python/)

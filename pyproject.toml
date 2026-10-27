@@ -1,0 +1,20 @@
+[project]
+name = "fbe-506-website"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Scott Joslin", email = "scott.joslin@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "ipykernel>=7.4.0",
+    "pandas>=3.1.0",
+]
+
+[project.scripts]
+fbe-506-website = "fbe_506_website:main"
+
+[build-system]
+requires = ["uv_build>=0.13.5,<0.14.0"]
+build-backend = "uv_build"

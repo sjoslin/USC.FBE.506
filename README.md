@@ -45,15 +45,20 @@ does not; stop the server with `Ctrl+C` and start it again.
 | File | URL | Nav |
 |---|---|---|
 | `index.md` | `/` | Home |
-| `install.md` | `/install/` | 1, parent |
-| `local-python.md` | `/install/python/` | 1.1 |
-| `vscode.md` | `/install/vscode/` | 1.2 |
-| `codex.md` | `/install/codex/` | 1.3 |
-| `setup-mac.md` | `/install/mac/` | 1.4 |
-| `setup-windows.md` | `/install/windows/` | 1.5 |
-| `optional.md` | `/optional/` | 2, parent |
-| `python-and-uv.md` | `/optional/environments/` | 2.1 |
-| `containers.md` | `/optional/sandboxing/` | 2.2 |
+| `overview.md` | `/install/` | 1, Overview |
+| `overview_local_python.md` | `/install/python/` | 1.1 |
+| `overview_vscode.md` | `/install/vscode/` | 1.2 |
+| `overview_codex.md` | `/install/codex/` | 1.3 |
+| `setup.md` | `/setup/` | 2, Setup |
+| `setup_mac.md` | `/install/mac/` | 2.1 |
+| `setup_pc.md` | `/install/windows/` | 2.2 |
+| `setup_vscode_python.md` | `/install/vscode/python/` | 2.3 |
+| `optional.md` | `/optional/` | 3, Optional Topics |
+| `python-and-uv.md` | `/optional/environments/` | 3.1 |
+| `containers.md` | `/optional/sandboxing/` | 3.2 |
+| `support-applications.md` | `/optional/support-applications/` | 3.3 |
+
+`overview_mac_draft.md` preserves the former Mac overview as an unpublished editing source. `setup_mac_old_link.md` keeps the old URL working with a link to Mac Setup.
 
 Each page sets its own `permalink`, and internal links are written as
 `{{ site.baseurl }}/install/mac/` rather than as relative `.md` paths, because

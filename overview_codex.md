@@ -1,6 +1,6 @@
 ---
 title: Codex Overview
-parent: Installing Local Python and Local AI
+parent: Overview
 layout: default
 nav_order: 3
 permalink: /install/codex/

@@ -1,7 +1,7 @@
 ---
 title: Optional Topics
 layout: default
-nav_order: 2
+nav_order: 4
 has_children: true
 permalink: /optional/
 ---
@@ -14,5 +14,6 @@ Nothing on these pages is required for the course. They're here for two moments:
 |---|---|
 | [Python Environments]({{ site.baseurl }}/optional/environments/) | what `uv` did, where packages live, and why a notebook can't find pandas |
 | [Better Sandboxing]({{ site.baseurl }}/optional/sandboxing/) | running the agent inside a container, so it can't read the rest of your machine |
+| [Support Applications]({{ site.baseurl }}/optional/support-applications/) | dictation, Git snapshots, and other useful conveniences |
 
 The first is the one to read when you hit an error you don't understand. The second is a demonstration we'll do in class; follow it yourself only if you're curious.
